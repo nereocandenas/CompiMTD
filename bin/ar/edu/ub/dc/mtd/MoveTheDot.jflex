@@ -18,7 +18,7 @@ import java_cup.runtime.Symbol;
 
 "E" {return new Symbol(sym.end);}
 
-"C" {return new Symbol(sym.center);}
+"C" {return new Symbol(sym.locate);}
 
 "U" {return new Symbol(sym.mov_u);}
 

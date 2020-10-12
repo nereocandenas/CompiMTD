@@ -6,7 +6,7 @@ import java_cup.runtime.*;
 action code {: static int x = 0;  
 			   static int y = 0; 
 			   
-			   public static void center_it() {
+			   public static void locate_it() {
 			       x = 0;
 			       y = 0;
 			   }
@@ -22,7 +22,12 @@ action code {: static int x = 0;
 :}
 
 /* Terminales */
-terminal begin, mov_u, mov_d, mov_r, mov_l, end, center;
+terminal begin, mov_u, mov_d, mov_r, mov_l, end, center; /*, par_a, par_c;*/
+
+
+/* Terminales con atributo asociado */
+/* terminal Integer num; */
+
 
 non terminal program, body, lines;
 
@@ -42,10 +47,10 @@ body ::= lines
 body ::= body lines
 		{:  :};
 
-lines ::= center 
+lines ::= locate 
 		{:
-		 System.out.println("Center");
-		 center_it();
+		 System.out.println("Locate");
+		 locate_it();
 		 :};
 
 lines ::= mov_u 
@@ -71,3 +76,20 @@ lines ::= mov_l
 		  System.out.println("Left");
 		  move_it(-1,0); 
 		  :};
+
+		  
+/*
+v ::= mov_u par_a num:n1 par_c
+		{: mover(0, n1); :};
+
+lines ::= mov_d par_a  num:n par_c
+		{: mover(0, -n1); :};
+
+lines ::= mov_r par_a  num:n par_c
+        {: mover(n1, 0); :};
+
+lines ::= mov_l par_a  num:n par_c
+		{: mover(-n1, 0); :};
+				  
+*/
+		  

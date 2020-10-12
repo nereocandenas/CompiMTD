@@ -560,7 +560,7 @@ public class Scanner implements java_cup.runtime.Scanner {
           }
         case 12: break;
         case 4: 
-          { return new Symbol(sym.center);
+          { return new Symbol(sym.locate);
           }
         case 13: break;
         case 5: 
