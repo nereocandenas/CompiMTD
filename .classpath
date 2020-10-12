@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/nereo.candenas/Documents/UB/Desarrollos/eclipse-workspace/Lib/java-cup-11a.jar"/>
-	<classpathentry kind="lib" path="C:/Users/nereo.candenas/Documents/UB/Desarrollos/eclipse-workspace/Lib/jflex-1.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nereo.candenas/Documents/UB/Desarrollos/eclipse-workspace/CompMTD/Lib/java-cup-11a.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nereo.candenas/Documents/UB/Desarrollos/eclipse-workspace/CompMTD/Lib/jflex-1.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
