@@ -1,0 +1,47 @@
+package ar.edu.ub.dc.mtd;
+
+import java_cup.runtime.*;
+
+
+action code {: static int x = 0;  
+			   static int y = 0; 
+			   
+			   public static void mover(int xx, int yy) {
+			       x += xx;
+			       y += yy;
+			   }
+			   
+			   public static void mostrar() {
+			   		System.out.println("x:" + x + " , y:" + y);
+			   }	
+:}
+
+terminal inicio, mov_a, mov_b,mov_d,mov_i, fin;
+
+non terminal programa, cuerpo, instr;
+
+start with programa;
+
+programa ::= inicio fin   //programa Vacio
+	    {: mostrar(); :};
+
+programa ::= inicio cuerpo fin // Programa con contenido
+		{: mostrar(); :};	
+
+cuerpo ::= instr
+		{:  :};
+
+cuerpo ::= cuerpo instr
+		{:  :};
+
+instr ::= mov_a
+		{: mover(0, 1); :};
+
+instr ::= mov_b
+		{: mover(0, -1); :};
+
+instr ::= mov_d
+        {: mover(1, 0); :};
+
+instr ::= mov_i
+		{: mover(-1, 0); :};

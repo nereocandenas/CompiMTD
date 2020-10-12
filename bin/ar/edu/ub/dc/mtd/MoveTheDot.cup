@@ -1,0 +1,73 @@
+package ar.edu.ub.dc.mtd;
+
+import java_cup.runtime.*;
+
+
+action code {: static int x = 0;  
+			   static int y = 0; 
+			   
+			   public static void center_it() {
+			       x = 0;
+			       y = 0;
+			   }
+			   			   
+			   public static void move_it(int xx, int yy) {
+			       x += xx;
+			       y += yy;
+			   }
+			   
+			   public static void show_it() {
+			   		System.out.println("x:" + x + " , y:" + y);
+			   }	
+:}
+
+/* Terminales */
+terminal begin, mov_u, mov_d, mov_r, mov_l, end, center;
+
+non terminal program, body, lines;
+
+start with program;
+
+/* Programa vacio */
+program ::= begin end
+	    {: show_it(); :};
+
+/* Programa con contenido */
+program ::= begin body end 
+		{: show_it(); :};	
+
+body ::= lines
+		{:  :};
+
+body ::= body lines
+		{:  :};
+
+lines ::= center 
+		{:
+		 System.out.println("Center");
+		 center_it();
+		 :};
+
+lines ::= mov_u 
+		{:
+		 System.out.println("Up");
+		 move_it(0,1);
+		 :};
+
+lines ::= mov_d 
+		{: 
+		  System.out.println("Down");
+		  move_it(0,-1); 
+		  :};
+
+lines ::= mov_r
+        {:
+          System.out.println("Right");
+          move_it(1,0); 
+          :};
+
+lines ::= mov_l
+		{:
+		  System.out.println("Left");
+		  move_it(-1,0); 
+		  :};
