@@ -22,11 +22,11 @@ action code {: static int x = 0;
 :}
 
 /* Terminales */
-terminal begin, mov_u, mov_d, mov_r, mov_l, end, center; /*, par_a, par_c;*/
+terminal begin, mov_u, mov_d, mov_r, mov_l, end, locate;/* par_a, par_c;*/
 
 
 /* Terminales con atributo asociado */
-/* terminal Integer num; */
+/* terminal Integer num; */ 
 
 
 non terminal program, body, lines;
@@ -76,20 +76,4 @@ lines ::= mov_l
 		  System.out.println("Left");
 		  move_it(-1,0); 
 		  :};
-
-		  
-/*
-v ::= mov_u par_a num:n1 par_c
-		{: mover(0, n1); :};
-
-lines ::= mov_d par_a  num:n par_c
-		{: mover(0, -n1); :};
-
-lines ::= mov_r par_a  num:n par_c
-        {: mover(n1, 0); :};
-
-lines ::= mov_l par_a  num:n par_c
-		{: mover(-n1, 0); :};
-				  
-*/
 		  
