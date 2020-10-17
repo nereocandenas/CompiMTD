@@ -17,63 +17,78 @@ action code {: static int x = 0;
 			   }
 			   
 			   public static void show_it() {
-			   		System.out.println("x:" + x + " , y:" + y);
+			   		System.out.println("Finaliza en x:" + x + ", y:" + y);
+			   		System.out.println("Fin de jecucion.");
 			   }	
 :}
 
 /* Terminales */
-terminal begin, mov_u, mov_d, mov_r, mov_l, end, locate;/* par_a, par_c;*/
-
+terminal INICIO, FIN, CENTRAR, VERTICAL, LATERAL, PAR_A, PAR_C, POS, NEG;
 
 /* Terminales con atributo asociado */
-/* terminal Integer num; */ 
+terminal Integer NUM;  
 
+non terminal PROGRAMA, CUERPO, LINEAS;
 
-non terminal program, body, lines;
-
-start with program;
+start with PROGRAMA;
 
 /* Programa vacio */
-program ::= begin end
-	    {: show_it(); :};
+PROGRAMA ::= INICIO FIN
+	    {: 
+	    System.out.println("Programa vacio");
+	    show_it(); 
+	    :};
 
 /* Programa con contenido */
-program ::= begin body end 
+PROGRAMA ::= INICIO CUERPO FIN 
 		{: show_it(); :};	
 
-body ::= lines
+CUERPO ::= LINEAS
 		{:  :};
 
-body ::= body lines
+CUERPO ::= CUERPO LINEAS
 		{:  :};
 
-lines ::= locate 
+LINEAS ::= CENTRAR
 		{:
-		 System.out.println("Locate");
+		 System.out.println("Se ubica en x:0, y:0");
 		 locate_it();
 		 :};
 
-lines ::= mov_u 
+LINEAS ::= VERTICAL PAR_A POS NUM:n1 PAR_C 
 		{:
-		 System.out.println("Up");
-		 move_it(0,1);
+		 System.out.println("Sube: "+n1.intValue());
+		 move_it(0,n1.intValue());
 		 :};
 
-lines ::= mov_d 
+
+LINEAS ::= VERTICAL PAR_A NUM:n1 PAR_C 
+		{:
+		 System.out.println("Sube: "+n1.intValue());
+		 move_it(0,n1.intValue());
+		 :};
+
+LINEAS ::= VERTICAL PAR_A NEG NUM:n1 PAR_C
 		{: 
-		  System.out.println("Down");
-		  move_it(0,-1); 
+	 	System.out.println("Baja: "+n1.intValue());
+		  move_it(0,-n1.intValue()); 
 		  :};
 
-lines ::= mov_r
+LINEAS ::= LATERAL PAR_A POS NUM:n1 PAR_C
         {:
-          System.out.println("Right");
-          move_it(1,0); 
+          System.out.println("Derecha: "+n1.intValue());
+          move_it(n1.intValue(),0); 
           :};
 
-lines ::= mov_l
+LINEAS ::= LATERAL PAR_A NUM:n1 PAR_C
+        {:
+          System.out.println("Derecha: "+n1.intValue());
+          move_it(n1.intValue(),0); 
+          :};
+
+LINEAS ::= LATERAL PAR_A NEG NUM:n1 PAR_C
 		{:
-		  System.out.println("Left");
-		  move_it(-1,0); 
+		  System.out.println("Izquierda: "+n1.intValue());
+		  move_it(-n1.intValue(),0); 
 		  :};
-		  
+				  

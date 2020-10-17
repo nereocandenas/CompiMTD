@@ -14,16 +14,33 @@ import java_cup.runtime.Symbol;
 
 %%
 
-"B" {return new Symbol(sym.begin);}
+"I" {return new Symbol(sym.INICIO);}
+"Inicio" {return new Symbol(sym.INICIO);}
 
-"E" {return new Symbol(sym.end);}
+"F" {return new Symbol(sym.FIN);}
+"Fin" {return new Symbol(sym.FIN);}
 
-"C" {return new Symbol(sym.locate);}
+"T" {return new Symbol(sym.FIN);}
+"Terminar" {return new Symbol(sym.FIN);}
 
-"U" {return new Symbol(sym.mov_u);}
+"C" {return new Symbol(sym.CENTRAR);}
+"Centrar" {return new Symbol(sym.CENTRAR);}
 
-"D" {return new Symbol(sym.mov_d);}
+"L" {return new Symbol(sym.LATERAL);}
+"mov_lat" {return new Symbol(sym.LATERAL);}
 
-"R" {return new Symbol(sym.mov_r);}
+"V" {return new Symbol(sym.VERTICAL);}
+"mov_ver" {return new Symbol(sym.VERTICAL);}
 
-"L" {return new Symbol(sym.mov_l);}
+"(" {return new Symbol(sym.PAR_A);}
+
+")" {return new Symbol(sym.PAR_C);}
+
+"+" {return new Symbol(sym.POS);}
+
+"-" {return new Symbol(sym.NEG);}
+
+[:digit:]+ { return new Symbol(sym.NUM, new Integer(yytext())); }
+
+[ \t\r\n]+ {;}
+
