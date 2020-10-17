@@ -20,11 +20,11 @@ import java_cup.runtime.Symbol;
 "F" {return new Symbol(sym.FIN);}
 "Fin" {return new Symbol(sym.FIN);}
 
-"T" {return new Symbol(sym.FIN);}
-"Terminar" {return new Symbol(sym.FIN);}
+"R" {return new Symbol(sym.REPETIR);}
+"Repetir" {return new Symbol(sym.REPETIR);}
 
-"C" {return new Symbol(sym.CENTRAR);}
-"Centrar" {return new Symbol(sym.CENTRAR);}
+"U" {return new Symbol(sym.UBICAR);}
+"Ubicar" {return new Symbol(sym.UBICAR);}
 
 "L" {return new Symbol(sym.LATERAL);}
 "mov_lat" {return new Symbol(sym.LATERAL);}
@@ -36,9 +36,15 @@ import java_cup.runtime.Symbol;
 
 ")" {return new Symbol(sym.PAR_C);}
 
+"[" {return new Symbol(sym.COR_A);}
+
+"]" {return new Symbol(sym.COR_C);}
+
 "+" {return new Symbol(sym.POS);}
 
 "-" {return new Symbol(sym.NEG);}
+
+"," {return new Symbol(sym.COMA);}
 
 [:digit:]+ { return new Symbol(sym.NUM, new Integer(yytext())); }
 

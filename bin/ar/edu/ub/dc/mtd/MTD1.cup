@@ -6,9 +6,9 @@ import java_cup.runtime.*;
 action code {: static int x = 0;  
 			   static int y = 0; 
 			   
-			   public static void locate_it() {
-			       x = 0;
-			       y = 0;
+			   public static void locate_it(int xx, int yy) {
+			       x = xx;
+			       y = yy;
 			   }
 			   			   
 			   public static void move_it(int xx, int yy) {
@@ -18,17 +18,17 @@ action code {: static int x = 0;
 			   
 			   public static void show_it() {
 			   		System.out.println("Finaliza en x:" + x + ", y:" + y);
-			   		System.out.println("Fin de jecucion.");
+			   		System.out.println("Fin de ejecución.");
 			   }	
 :}
 
 /* Terminales */
-terminal INICIO, FIN, CENTRAR, VERTICAL, LATERAL, PAR_A, PAR_C, POS, NEG;
+terminal INICIO, FIN, UBICAR, VERTICAL, LATERAL, PAR_A, PAR_C, POS, NEG, REPETIR, COR_A, COR_C, COMA;
 
 /* Terminales con atributo asociado */
 terminal Integer NUM;  
 
-non terminal PROGRAMA, CUERPO, LINEAS;
+non terminal PROGRAMA, CUERPO, LINEAS, LINEA1;
 
 start with PROGRAMA;
 
@@ -43,17 +43,28 @@ PROGRAMA ::= INICIO FIN
 PROGRAMA ::= INICIO CUERPO FIN 
 		{: show_it(); :};	
 
+PROGRAMA ::= INICIO LINEA1 CUERPO FIN 
+		{: show_it(); :};	
+
+LINEA1 ::= UBICAR PAR_A NUM:n1 COMA NUM:n2 PAR_C 
+		{:
+		 System.out.println("Se ubica en x:"+n1.intValue()+", y:"+n2.intValue());
+		 locate_it(n1.intValue(),n2.intValue());
+		 :};
+
 CUERPO ::= LINEAS
 		{:  :};
 
 CUERPO ::= CUERPO LINEAS
 		{:  :};
 
-LINEAS ::= CENTRAR
-		{:
-		 System.out.println("Se ubica en x:0, y:0");
-		 locate_it();
-		 :};
+LINEAS ::= REPETIR PAR_A NUM:n1 PAR_C COR_A VERTICAL PAR_A POS NUM:n2 PAR_C COR_C
+			{: 
+			for (int i = 0; i < n1; i++) {
+			System.out.println("Rep("+i+")-> Sube: "+n2.intValue());
+			move_it(0,n2.intValue());
+			} 
+			:};	
 
 LINEAS ::= VERTICAL PAR_A POS NUM:n1 PAR_C 
 		{:
@@ -61,6 +72,13 @@ LINEAS ::= VERTICAL PAR_A POS NUM:n1 PAR_C
 		 move_it(0,n1.intValue());
 		 :};
 
+LINEAS ::= REPETIR PAR_A NUM:n1 PAR_C COR_A VERTICAL PAR_A NUM:n2 PAR_C COR_C
+			{: 
+			for (int i = 0; i < n1; i++) {
+			System.out.println("Rep("+i+")-> Sube: "+n2.intValue());
+			move_it(0,n2.intValue());
+			} 
+			:};	
 
 LINEAS ::= VERTICAL PAR_A NUM:n1 PAR_C 
 		{:
@@ -68,11 +86,30 @@ LINEAS ::= VERTICAL PAR_A NUM:n1 PAR_C
 		 move_it(0,n1.intValue());
 		 :};
 
+LINEAS ::= REPETIR PAR_A NUM:n1 PAR_C COR_A VERTICAL PAR_A NEG NUM:n2 PAR_C COR_C
+			{: 
+			for (int i = 0; i < n1; i++) {
+			System.out.println("Rep("+i+")-> Baja: "+n2.intValue());
+			move_it(0,-n2.intValue());
+			} 
+			:};	
+
 LINEAS ::= VERTICAL PAR_A NEG NUM:n1 PAR_C
 		{: 
 	 	System.out.println("Baja: "+n1.intValue());
 		  move_it(0,-n1.intValue()); 
 		  :};
+
+
+
+
+LINEAS ::= REPETIR PAR_A NUM:n1 PAR_C COR_A LATERAL PAR_A POS NUM:n2 PAR_C COR_C
+			{: 
+			for (int i = 0; i < n1; i++) {
+			System.out.println("Rep("+i+")-> Derecha: "+n2.intValue());
+			move_it(n2.intValue(),0);
+			} 
+			:};	
 
 LINEAS ::= LATERAL PAR_A POS NUM:n1 PAR_C
         {:
@@ -80,15 +117,33 @@ LINEAS ::= LATERAL PAR_A POS NUM:n1 PAR_C
           move_it(n1.intValue(),0); 
           :};
 
+LINEAS ::= REPETIR PAR_A NUM:n1 PAR_C COR_A LATERAL PAR_A NUM:n2 PAR_C COR_C
+			{: 
+			for (int i = 0; i < n1; i++) {
+			System.out.println("Rep("+i+")-> Derecha: "+n2.intValue());
+			move_it(n2.intValue(),0);
+			} 
+			:};	
+
 LINEAS ::= LATERAL PAR_A NUM:n1 PAR_C
         {:
           System.out.println("Derecha: "+n1.intValue());
           move_it(n1.intValue(),0); 
           :};
 
+LINEAS ::= REPETIR PAR_A NUM:n1 PAR_C COR_A LATERAL PAR_A NEG NUM:n2 PAR_C COR_C
+			{: 
+			for (int i = 0; i < n1; i++) {
+			System.out.println("Rep("+i+")-> Izquierda: "+n2.intValue());
+			move_it(-n2.intValue(),0);
+			} 
+			:};	
+
 LINEAS ::= LATERAL PAR_A NEG NUM:n1 PAR_C
 		{:
 		  System.out.println("Izquierda: "+n1.intValue());
 		  move_it(-n1.intValue(),0); 
 		  :};
+
+			
 				  

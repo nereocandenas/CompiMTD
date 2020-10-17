@@ -14,33 +14,33 @@ import java_cup.runtime.Symbol;
 
 %%
 
-"I" {return new Symbol(sym.INICIO);}
-"Inicio" {return new Symbol(sym.INICIO);}
+"i"|"I"|"inicio"|"Inicio"|"INICIO" {return new Symbol(sym.INICIO);}
+ 
+"f"|"F"|"fin"|"Fin"|"FIN" {return new Symbol(sym.FIN);}
 
-"F" {return new Symbol(sym.FIN);}
-"Fin" {return new Symbol(sym.FIN);}
+"r"|"R"|"repetir"|"Repetir"|"REPETIR" {return new Symbol(sym.REPETIR);}
 
-"T" {return new Symbol(sym.FIN);}
-"Terminar" {return new Symbol(sym.FIN);}
+"u"|"U"|"ubicar"|"Ubicar"|"UBICAR" {return new Symbol(sym.UBICAR);}
 
-"C" {return new Symbol(sym.CENTRAR);}
-"Centrar" {return new Symbol(sym.CENTRAR);}
+"l"|"L"|"mov_lat"|"Mov_Lat"|"MOV_LAT" {return new Symbol(sym.LATERAL);}
 
-"L" {return new Symbol(sym.LATERAL);}
-"mov_lat" {return new Symbol(sym.LATERAL);}
-
-"V" {return new Symbol(sym.VERTICAL);}
-"mov_ver" {return new Symbol(sym.VERTICAL);}
+"v"|"V"|"mov_ver"|"Mov_Ver"|"MOV_VER" {return new Symbol(sym.VERTICAL);}
 
 "(" {return new Symbol(sym.PAR_A);}
 
 ")" {return new Symbol(sym.PAR_C);}
 
-"+" {return new Symbol(sym.POS);}
+"[" {return new Symbol(sym.COR_A);}
 
-"-" {return new Symbol(sym.NEG);}
+"]" {return new Symbol(sym.COR_C);}
 
-[:digit:]+ { return new Symbol(sym.NUM, new Integer(yytext())); }
+"+" {return new Symbol(sym.SUMA);}
+
+"-" {return new Symbol(sym.RESTA);}
+
+"," {return new Symbol(sym.COMA);}
+
+[:digit:]+ { return new Symbol(sym.ENTERO, new Integer(yytext())); }
 
 [ \t\r\n]+ {;}
 
