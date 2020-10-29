@@ -635,11 +635,11 @@ public class Scanner implements java_cup.runtime.Scanner {
           }
         case 27: break;
         case 12: 
-          { return new Symbol(sym.POS);
+          { return new Symbol(sym.SUMA);
           }
         case 28: break;
         case 13: 
-          { return new Symbol(sym.NEG);
+          { return new Symbol(sym.RESTA);
           }
         case 29: break;
         case 14: 
@@ -647,7 +647,7 @@ public class Scanner implements java_cup.runtime.Scanner {
           }
         case 30: break;
         case 15: 
-          { return new Symbol(sym.NUM, new Integer(yytext()));
+          { return new Symbol(sym.ENTERO, new Integer(yytext()));
           }
         case 31: break;
         case 16: 

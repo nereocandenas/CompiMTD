@@ -52,6 +52,25 @@ LINEA1 ::= UBICAR PAR_A ENTERO:n1 COMA ENTERO:n2 PAR_C
 		 locate_it(n1.intValue(),n2.intValue());
 		 :};
 
+LINEA1 ::= UBICAR PAR_A RESTA ENTERO:n1 COMA RESTA ENTERO:n2 PAR_C 
+		{:
+		 System.out.println("Se ubica en x:-"+n1.intValue()+", y:-"+n2.intValue());
+		 locate_it(-n1.intValue(),-n2.intValue());
+		 :};
+
+LINEA1 ::= UBICAR PAR_A RESTA ENTERO:n1 COMA ENTERO:n2 PAR_C 
+		{:
+		 System.out.println("Se ubica en x:-"+n1.intValue()+", y:"+n2.intValue());
+		 locate_it(-n1.intValue(),n2.intValue());
+		 :};
+
+LINEA1 ::= UBICAR PAR_A ENTERO:n1 COMA RESTA ENTERO:n2 PAR_C 
+		{:
+		 System.out.println("Se ubica en x:"+n1.intValue()+", y:-"+n2.intValue());
+		 locate_it(n1.intValue(),-n2.intValue());
+		 :};
+
+
 CUERPO ::= LINEAS
 		{:  :};
 
